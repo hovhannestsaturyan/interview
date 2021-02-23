@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="headerTitle">
+      Searchbar
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="spin" *ngIf="!allData" >
+<ion-spinner  name="bubbles"></ion-spinner>
+</div>
+<ion-content fullscreen>
+  <ion-searchbar placeholder="Search" [(ngModel)]="serachValue" (ngModelChange)="rearchResult(serachValue)">
+  </ion-searchbar>
+  <ion-list *ngIf="allData.length>0">
+      <ion-item *ngFor="let oneData of allData.slice(0,allDataLength)" (click)="goToDetails(oneData)">
+        <ion-avatar slot="start">
+          <img [src]="oneData.image">
+        </ion-avatar>
+        <ion-label>
+          <h3>{{oneData.model}}</h3>
+          <p>{{oneData.description}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  </ion-content>

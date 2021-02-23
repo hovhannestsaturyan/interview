@@ -1,0 +1,11 @@
+{
+    "android": {
+        "release": {
+            "keystore": "./interview.jks",
+            "storePassword": "interview321",
+            "alias": "interview",
+            "password" : "interview321",
+            "keystoreType": ""
+        }
+    }
+}
