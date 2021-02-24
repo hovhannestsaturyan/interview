@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+
+
+import {AlertService} from '../alerts/alert.service';
 
 @Component({
   selector: 'app-details',
@@ -16,9 +19,10 @@ public productPrice: number;
 public amount: number;
 public qty: number;
   constructor(
+    private alertCtrl: AlertService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    public alertController: AlertController
+    private keyboard: Keyboard
   ) {
     this.productName = activatedRoute.snapshot.paramMap.get('name');
     this.productImage = activatedRoute.snapshot.paramMap.get('image');
@@ -31,6 +35,7 @@ public qty: number;
   home_page(){
     this.router.navigate(['/home'], {replaceUrl: true}) ;
   }
+  /*_____________________Get Input Results________________________*/
   fastWayAmount(amount: number){
     this.amount = amount ;
     this.calculateResult('amount', amount);
@@ -39,9 +44,20 @@ public qty: number;
     this.qty = qty ;
     this.calculateResult('qty', qty);
   }
+  enterValue(key: string , value: number , event: any){
+    if (event.keyCode === 13) {
+      this.keyboard.show();
+      this.calculateResult(key, value);
+    }
+  }
+  /*_____________________Get Input Results End________________________*/
+
+  /*_____________________End Input values________________________*/
+
+  /*_____________________Calcilation________________________*/
   calculateResult(key: string , value: number){
     if (value <= 0){
-      this.presentAlert(key);
+      this.alertCtrl.presentAlert(key);
       return false;
     }
     if (key === 'amount'){
@@ -50,14 +66,6 @@ public qty: number;
       this.amount = Number((this.productPrice * value).toFixed(2));
     }
   }
-  async presentAlert(value) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Message',
-      message: value + ' should be greater than 0',
-      buttons: ['OK']
-    });
+  /*_____________________End Calcilation________________________*/
 
-    await alert.present();
-  }
 }

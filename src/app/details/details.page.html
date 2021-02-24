@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content >
+  <ion-grid>
   <img [src]="productImage" class="w100"  alt="">
   <ion-row class="p10">
     <ion-col>
@@ -16,31 +17,32 @@
   </ion-col>
   </ion-row>
   <ion-row class="p10">
-    <ion-col>
-      <ion-button (click)="fastWayAmount(100)">$100</ion-button>
+    <ion-col class="ion-align-self-start" size="3" >
+      <ion-button class="w100" (click)="fastWayAmount(100)">$100</ion-button>
     </ion-col>
-    <ion-col>
-      <ion-button (click)="fastWayAmount(10)">$10</ion-button>
+    <ion-col class="ion-align-self-center" size="3">
+      <ion-button class="w100" (click)="fastWayAmount(10)">$10</ion-button>
     </ion-col>
-    <ion-col>
-      <ion-button (click)="fastWayQty(2.2)">2.2 qty</ion-button>
+    <ion-col class="ion-align-self-center" size="3">
+      <ion-button class="w100" (click)="fastWayQty(2.2)">2.2 qty</ion-button>
     </ion-col>
-    <ion-col>
-      <ion-button (click)="fastWayQty(9)">9 qty</ion-button>
+    <ion-col class="ion-align-self-end" size="3">
+      <ion-button class="w100" (click)="fastWayQty(9)">9 qty</ion-button>
     </ion-col>
   </ion-row>
   <ion-row class="p10">
     <ion-col>
       <ion-item>
         <ion-label position="stacked">Amount, $</ion-label>
-        <ion-input type="number" min="0" [(ngModel)]="amount" (ngModelChange)="calculateResult('amount',amount)"></ion-input>
+        <ion-input type="number" appNumbers [(ngModel)]="amount" (keyup)="enterValue('amount',amount,$event)"></ion-input>
       </ion-item>
     </ion-col>
     <ion-col>
       <ion-item>
         <ion-label position="stacked">Quantity</ion-label>
-        <ion-input type="number" min="0" [(ngModel)]="qty" (ngModelChange)="calculateResult('qty',qty)"></ion-input>
+        <ion-input type="number" appNumbers [(ngModel)]="qty" (keyup)="enterValue('qty',qty,$event)"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
+  </ion-grid>
 </ion-content>
