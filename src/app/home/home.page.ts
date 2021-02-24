@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import {Router} from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import {AlertService} from '../alerts/alert.service';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +33,7 @@ export class HomePage implements OnInit {
     private _http: HttpService,
     private alertCtrl: AlertService,
     private router: Router,
+    private keyboard: Keyboard,
     private storage: Storage
   ) {}
   /*_____________________Get Searchbar Value End________________________*/
@@ -66,6 +68,10 @@ export class HomePage implements OnInit {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
   /*_____________________Infinite Functions End________________________*/
-
+  enterValue(event){
+    if (event.keyCode === 13) {
+      this.keyboard.hide();
+    }
+  }
 }
 

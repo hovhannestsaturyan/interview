@@ -9,7 +9,7 @@
 <ion-spinner  name="bubbles"></ion-spinner>
 </div>
 <ion-content fullscreen>
-  <ion-searchbar placeholder="Search" [(ngModel)]="serachValue" (ngModelChange)="rearchResult(serachValue)">
+  <ion-searchbar placeholder="Search" (keyup)="enterValue($event)" [(ngModel)]="serachValue" (ngModelChange)="rearchResult(serachValue)">
   </ion-searchbar>
   <ion-list *ngIf="allData.length>0">
       <ion-item *ngFor="let oneData of allData.slice(0,allDataLength)" (click)="goToDetails(oneData)">

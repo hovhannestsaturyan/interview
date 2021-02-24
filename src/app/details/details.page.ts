@@ -46,7 +46,7 @@ public qty: number;
   }
   enterValue(key: string , value: number , event: any){
     if (event.keyCode === 13) {
-      this.keyboard.show();
+      this.keyboard.hide();
       this.calculateResult(key, value);
     }
   }
